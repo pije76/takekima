@@ -53,6 +53,7 @@ Stock Report
 							<tbody>
 
 							{% for every in item_data %}
+								{% if forloop.first %}
 								<tr class="nk-tb-item">
 									<td class="border border-gray nk-tb-col tb-col-sm">
 										<span class="tb-sub">
@@ -138,7 +139,96 @@ Stock Report
 									</td>
 								</tr>
 								<!-- .nk-tb-item -->
-							 {% endfor %}
+								{% endif %}
+								{% endfor %}
+								{% for every in item_data|slice:"1:" %}
+
+								<tr class="nk-tb-item">
+									<td class="border border-gray nk-tb-col tb-col-sm">
+										<span class="tb-sub">
+											<span class="title">{{ forloop.counter|add:"1" }}</span>
+										</span>
+									</td>
+									<td class="border border-gray nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.date }}</span>
+									</td>
+									<td class="border border-gray nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.description }}</span>
+									</td>
+									<td class="border border-gray nk-tb-col tb-col-md">
+										<span class="tb-lead"><a href="{% url 'books:view-stock-detail' every.code %}">{{ every.code }}</a></span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.in_qty }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.in_price }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.in_total }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.out_qty }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.out_price }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.out_total }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.stock_qty }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.stock_price }}</span>
+									</td>
+									<td class="border border-gray text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.stock_total }}</span>
+									</td>
+								</tr>
+								<tr class="nk-tb-item">
+									<td class="border border-gray border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub">Balance</span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-left-0 border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+									<td class="border border-gray border-right-0 text-center nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.balance_qty }}</span>
+									</td>
+									<td class="border border-gray border-right-0 nk-tb-col tb-col-md">
+										<span class="tb-sub">{{ every.balance }}</span>
+									</td>
+									<td class="border border-gray border-left-0 nk-tb-col tb-col-md">
+										<span class="tb-sub"></span>
+									</td>
+								</tr>
+								<!-- .nk-tb-item -->
+								{% endfor %}
 								<tr class="nk-tb-item">
 									<td class="border border-gray border-right-0 nk-tb-col tb-col-md">
 										<span class="tb-sub">Summary</span>
