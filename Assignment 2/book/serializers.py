@@ -21,28 +21,17 @@ class ItemSerializer(serializers.ModelSerializer):
 		fields = ('code', 'name', 'unit', 'description', 'stock', 'balance')
 
 class DetailPurchaseSerializer(serializers.Serializer):
-# class DetailPurchaseSerializer(serializers.ModelSerializer):
 	item_code = serializers.CharField(read_only=True)
 	header_code = serializers.CharField(read_only=True)
 
-	# class Meta:
-	# 	model = Purchase
-	# 	fields = ('item_code', 'quantity', 'unit_price', 'header_code')
-
 	def to_representation(self, instance):
 		rep = super().to_representation(instance)
-		# rep['item_code'] = instance.item_code
 		rep['header_code'] = instance.header_code.code
 		return rep
 
 class DetailSellSerializer(serializers.Serializer):
-# class DetailSellSerializer(serializers.ModelSerializer):
 	header_code = serializers.CharField(read_only=True)
 	item_code = serializers.CharField(read_only=True)
-
-	# class Meta:
-	# 	model = Sell
-	# 	fields = ('item_code', 'quantity', 'header_code')
 
 	def to_representation(self, instance):
 		rep = super().to_representation(instance)
@@ -50,20 +39,8 @@ class DetailSellSerializer(serializers.Serializer):
 		return rep
 
 class NestedSerializer(serializers.Serializer):
-	# code = serializers.CharField(read_only=True)
-	# date = serializers.DateField(read_only=True)
-	# date = serializers.ModelField(model_field=Purchase()._meta.get_field('date'))
-
-	# in_price = serializers.IntegerField(read_only=True)
-	# details = DetailPurchaseSerializer(source='*')
-
-	# def to_representation(self, instance):
-
-	# 	return serialized_data
-
 	def to_representation(self, instance):
-		# print("self", self.context)
-		# print("instance", instance)
+
 		request = self.context.get("request")
 		get_start_date = request.GET.get("start_date",None)
 		get_end_date = request.GET.get("end_date",None)
@@ -181,14 +158,12 @@ class SellSerializer(serializers.ModelSerializer):
 
 
 class ReportListSerializer(serializers.ModelSerializer):
-	# name = serializers.CharField()
 
 	class Meta:
 		model = Item
 		fields = ('code', 'name', 'description', 'stock', 'unit', 'balance')
 
 
-# class ResultedSerializer(serializers.Serializer):
 class ResultedSerializer(serializers.ModelSerializer):
 
 	class Meta:
@@ -256,17 +231,9 @@ class SummarySerializer(serializers.ModelSerializer):
 
 
 class ItemDetailSerializer(serializers.ModelSerializer):
-	# items = ResultedSerializer(source='*')
-	# items = NestedSerializer(source='*')
 	items = NestedSerializer(source='*', read_only=True)
-	# items = serializers.SerializerMethodField()
-	# items = NestedSerializer(source='purchase_codes', many=True)
-	# items = ResultedSerializer(source='purchase_codes', many=True)
 	item_code = serializers.CharField(source='code')
-	# in_qty = serializers.Field(source='in_qty')
 	summary = SummarySerializer(source='*')
-	# summary = SummarySerializer(many=True)
-
 
 	class Meta:
 		model = Item

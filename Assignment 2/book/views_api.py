@@ -155,29 +155,11 @@ class ReportDetailViewSet(viewsets.ModelViewSet):
 		return "Stock Report Detail"
 
 	def get_queryset(self):
-		# queryset = Purchase.objects.all()
 		get_item_code = self.kwargs['code']
 
 		if get_item_code is not None:
-			# get_item = Item.objects.get(code=get_item_code).id
 			start_date = self.request.query_params.get('start_date', None)
 			end_date = self.request.query_params.get('end_date', None)
 			queryset_item = Item.objects.filter(code=get_item_code)
-			# get_property = [item.in_qty() for item in queryset_item]
-
-			# queryset_purchase = Purchase.objects.filter(item_code=get_item).filter(date__range=[start_date, end_date]).order_by('date')
-			# queryset_sell = Sell.objects.filter(item_code=get_item).filter(date__range=[start_date, end_date]).order_by('date')
-			# all_query = list(queryset_purchase) + list(queryset_sell)
-
-			# sorted_query = sorted(all_query, key=lambda x: x.date)
 		return queryset_item
 
-	# def get_serializer_class(self):
-	# 	get_item_code = self.kwargs['code']
-	# 	if get_item_code is not None:
-	# 		return ReportDetailViewSet
-		# else:
-		# 	return ReportDetailViewSet
-
-# report_list = ReportViewSet.as_view({'get': 'list'})
-# report_detail = ReportDetailViewSet.as_view({'get': 'retrieve'})
