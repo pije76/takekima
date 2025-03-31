@@ -126,6 +126,10 @@ def view_report_range(request, code=None, start_date=None, end_date=None):
 
 		datas = json_resp_report['result']
 
+		print("summary", summary)
+		print("data_stock", type(data_stock))
+		print("data_stock", len(data_stock))
+
 		if request.method == 'POST':
 
 			context = {

@@ -137,6 +137,7 @@ class NestedSerializer(serializers.Serializer):
 
 				for last in last_sell:
 					last.out_qty = last.out_qty() - first_in_qty
+					sum_out_qty = last.out_qty - first_in_qty
 					last.out_price = last_in_price
 					last.out_total = last_in_total
 
@@ -210,6 +211,9 @@ class ResultedSerializer(serializers.ModelSerializer):
 		)
 
 class SummarySerializer(serializers.ModelSerializer):
+	in_qty = serializers.SerializerMethodField()
+	out_qty = serializers.SerializerMethodField()
+	balance_qty = serializers.IntegerField(source='stock')
 
 	class Meta:
 		model = Item
@@ -219,6 +223,37 @@ class SummarySerializer(serializers.ModelSerializer):
 			'balance_qty',
 			'balance',
 		)
+
+	def get_in_qty(self, data):
+		request = self.context.get("request")
+		get_start_date = request.GET.get("start_date",None)
+		get_end_date = request.GET.get("end_date",None)
+
+		queryset_purchase = Purchase.objects.filter(item_code=data).filter(date__range=[get_start_date, get_end_date])
+		queryset_sell = Sell.objects.filter(item_code=data).filter(date__range=[get_start_date, get_end_date])
+
+		summary_in_qty_purch = sum([item.in_qty() for item in queryset_purchase])
+		summary_in_qty_sell = sum([item.in_qty() for item in queryset_sell])
+
+		get_qty = summary_in_qty_purch + summary_in_qty_sell
+
+		return get_qty
+
+	def get_out_qty(self, data):
+		request = self.context.get("request")
+		get_start_date = request.GET.get("start_date",None)
+		get_end_date = request.GET.get("end_date",None)
+
+		queryset_purchase = Purchase.objects.filter(item_code=data).filter(date__range=[get_start_date, get_end_date])
+		queryset_sell = Sell.objects.filter(item_code=data).filter(date__range=[get_start_date, get_end_date])
+
+		summary_out_qty_purch = sum([item.out_qty() for item in queryset_purchase])
+		summary_out_qty_sell = sum([item.out_qty() for item in queryset_sell])
+
+		get_qty = summary_out_qty_purch + summary_out_qty_sell
+
+		return get_qty
+
 
 class ItemDetailSerializer(serializers.ModelSerializer):
 	# items = ResultedSerializer(source='*')
