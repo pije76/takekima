@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Homepage
+{% endblock title %}
+
+{% block content %}
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+               <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Homepage</h3>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+                                        <li class="nk-block-tools-opt"><a href="{% url 'books:view-report' %}" class="btn btn-primary"><em class="icon ni ni-reports"></em><span>Reports</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+
+                <div class="nk-block">
+                    <div class="row g-gs">
+
+                         <div class="col-xxl-6">
+                            <div class="card card-full">
+                                <div class="nk-ecwg nk-ecwg8 h-100">
+                                    <div class="card-inner">
+                                        <div class="card-title-group mb-3">
+                                            <div class="card-title">
+                                                <h6 class="title">Takekima Test</h6>
+                                            </div>
+                                        </div>
+                                        <div class="nk-ecwg8-ck">
+                                          <canvas class="line-chart chartjs-render-monitor" id="solidLineChart" width="327" height="225" style="display: block; height: 180px; width: 262px;"></canvas>
+                                        </div>
+                                        <div class="chart-label-group pl-5">
+                                            <div class="chart-label"></div>
+                                            <div class="chart-label">{% now "jS-F-Y: H:i" %}</div>
+                                        </div>
+                                    </div><!-- .card-inner -->
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+

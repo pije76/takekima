@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create an Account
+{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+  <meta http-equiv="REFRESH" content="0;url=/module">
+  {% endif %}
+
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+               <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Register Page</h3>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

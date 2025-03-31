@@ -1,0 +1,9 @@
+.nk-head {
+  text-align: center;
+  border:  1px solid #fefefe !important;
+}
+
+.nk-subody {
+/*   text-align: center; */
+  border:  1px dotted #1D2D40 !important;
+}
