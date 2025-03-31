@@ -11054,3 +11054,4 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 django.db.utils.OperationalError: no such table: book_item
 Not Found: /sw.js
+Not Found: /sw.js

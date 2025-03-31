@@ -118,14 +118,11 @@ def view_report_range(request, code=None, start_date=None, end_date=None):
 
 		json_resp_report = resp_report.json()
 
-		# print("json_resp_report", json_resp_report)
-
 		data_transactions = []
 
 		title = "Stock Report"
 		data_stock = json_resp_report['result']['items']
 		summary = json_resp_report['result']['summary']
-		print("summary", summary)
 
 		datas = json_resp_report['result']
 
